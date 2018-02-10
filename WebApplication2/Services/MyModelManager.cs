@@ -19,27 +19,27 @@ namespace WebApplication2.Services
         }
         public virtual IEnumerable Read()
         {
-            return GetModel.ToList();
+            return GetModel;
         }
 
-        public T Retrieve(int id)
+        public virtual T Retrieve(int id)
         {
             return GetModel.Find(id);
         }
 
-        public T Retrieve(Guid id)
+        public virtual T Retrieve(Guid id)
         {
             return GetModel.Find(id);
         }
 
-        public T Create(T model)
+        public virtual T Create(T model)
         {
             GetModel.Add(model);
             _context.SaveChanges();
             return model;
         }
 
-        public T Delete(int id)
+        public virtual T Delete(int id)
         {
             var model = GetModel.Find(id);
             if (model == null) return model;
@@ -48,7 +48,7 @@ namespace WebApplication2.Services
             return model;
         }
 
-        public T Delete(string id)
+        public virtual T Delete(string id)
         {
             var model = GetModel.Find(id);
             if (model == null) return model;
@@ -58,22 +58,24 @@ namespace WebApplication2.Services
         }
 
 
-        public T Update(int id, T model)
+        public virtual T Update(int id, T model)
         {
             var entity = GetModel.Find(id);
             if (entity == null) return null;
-            GetModel.Update(model);
+            entity = model;
+            GetModel.Update(entity);
             _context.SaveChanges();
-            return model;
+            return entity;
         }
 
-        public T Update(string id, T model)
+        public virtual T Update(string id, T model)
         {
             var entity = GetModel.Find(id);
             if (entity == null) return null;
-            GetModel.Update(model);
+            entity = model;
+            GetModel.Update(entity);
             _context.SaveChanges();
-            return model;
+            return entity;
         }
 
         protected DbSet<T> GetModel

@@ -27,5 +27,7 @@ namespace WebApplication2.Models
         [ForeignKey("AutorId")]
         public Autor Autor { get; set; }
 
+        [JsonIgnore]
+        public List<LibreriaLibro> LibreriaLibros { get; set; }
     }
 }
